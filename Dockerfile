@@ -1,4 +1,4 @@
-# Multi-stage Dockerfile for Laravel 10 + Octane on Railway
+# Dockerfile for Laravel 10 on Railway
 FROM composer:2.6 AS composer
 
 FROM php:8.2-fpm AS base
@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     supervisor \
     nodejs \
     npm \
+    nginx \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
@@ -36,10 +37,6 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 
 # Install Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
-
-# Install PHP Octane RoadRunner
-RUN curl -sSfL https://github.com/spiral/roadrunner/releases/download/v2024.1.2/roadrunner-2024.1.2-linux-amd64.tar.gz | tar -xz -C /usr/local/bin/ \
-    && chmod +x /usr/local/bin/rr
 
 # Copy composer from composer stage
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -70,14 +67,15 @@ RUN php artisan config:cache \
     && php artisan view:cache \
     && php artisan event:cache
 
+# Configure Nginx
+RUN rm -f /etc/nginx/sites-enabled/default
+COPY docker/nginx/default.conf /etc/nginx/sites-enabled/default
+
 # Production stage
 FROM base AS production
 
 # Expose port
 EXPOSE 8080
 
-# Copy Octane configuration
-COPY octane.yaml /var/www/html/
-
-# Start Octane server
-CMD php artisan octane:start --server=roadrunner --host=0.0.0.0 --port=8080
+# Start both PHP-FPM and Nginx
+CMD ["sh", "-c", "php-fpm -D && nginx -g 'daemon off;'"]
