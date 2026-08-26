@@ -47,6 +47,12 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
+# Create cache directories
+RUN mkdir -p storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    bootstrap/cache
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
