@@ -71,10 +71,10 @@ RUN cp .env.example .env
 RUN php artisan key:generate --force
 
 # Clear and cache configurations
-RUN php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache \
-    && php artisan event:cache
+RUN php artisan config:cache
+RUN php artisan route:cache
+RUN php artisan view:cache
+RUN php artisan event:cache
 
 # Configure Nginx
 RUN rm -f /etc/nginx/sites-enabled/default
