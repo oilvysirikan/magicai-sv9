@@ -23,7 +23,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+RUN docker-php-ext-configure gd \
+    --with-freetype \
+    --with-jpeg \
+    --with-webp \
     && docker-php-ext-install -j$(nproc) \
     gd \
     pdo \
@@ -72,7 +75,6 @@ RUN php artisan key:generate --force
 
 # Clear and cache configurations
 RUN php artisan config:cache
-RUN php artisan view:cache
 RUN php artisan event:cache
 
 # Configure Nginx
