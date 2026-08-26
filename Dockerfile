@@ -67,14 +67,8 @@ RUN chown -R www-data:www-data /var/www/html \
 # Create .env file from .env.example
 RUN cp .env.example .env
 
-# Set development mode for build
-RUN sed -i 's/APP_ENV=production/APP_ENV=development/' .env
-
-# Generate application key
-RUN php artisan key:generate
-
-# Set back to production mode
-RUN sed -i 's/APP_ENV=development/APP_ENV=production/' .env
+# Generate application key with force flag
+RUN php artisan key:generate --force
 
 # Clear and cache configurations
 RUN php artisan config:cache \
