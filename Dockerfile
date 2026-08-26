@@ -7,10 +7,13 @@ FROM php:8.2-fpm AS base
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
     libpng-dev \
+    libwebp-dev \
+    libzip-dev \
     libonig-dev \
     libxml2-dev \
-    libzip-dev \
     zip \
     unzip \
     supervisor \
