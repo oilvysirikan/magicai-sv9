@@ -27,5 +27,6 @@ Thumbs.db
 coverage
 .clover
 *.tgz
+*.tar.gz
 .updater
 *.log
