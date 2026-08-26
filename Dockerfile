@@ -8,12 +8,18 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     libfreetype6-dev \
-    libjpeg62-turbo-dev \
+    libjpeg-dev \
     libpng-dev \
     libwebp-dev \
     libzip-dev \
     libonig-dev \
     libxml2-dev \
+    libxslt1-dev \
+    libmysqlclient-dev \
+    default-libmysqlclient-dev \
+    libssl-dev \
+    libbz2-dev \
+    libgmp-dev \
     zip \
     unzip \
     supervisor \
@@ -36,10 +42,23 @@ RUN docker-php-ext-configure gd \
     pcntl \
     bcmath \
     opcache \
-    zip
+    zip \
+    sockets \
+    gmp \
+    bz2
 
 # Install Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
+
+# Install additional extensions for Octane/RoadRunner
+RUN docker-php-ext-install -j$(nproc) \
+    xsl \
+    intl
+
+# Install RoadRunner for Octane
+RUN curl -L https://github.com/roadrunner-server/roadrunner/releases/download/v2.12.2/roadrunner-2.12.2-linux-amd64.deb -o /tmp/roadrunner.deb \
+    && dpkg -i /tmp/roadrunner.deb \
+    && rm /tmp/roadrunner.deb
 
 # Copy composer from composer stage
 COPY --from=composer /usr/bin/composer /usr/bin/composer
