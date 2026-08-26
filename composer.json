@@ -120,7 +120,6 @@
 		"smalot/pdfparser": "^2.7",
 		"spatie/db-dumper": "^3.8",
 		"spatie/laravel-health": "^1.22",
-		"spatie/laravel-activitylog": "^4.8",
 		"spatie/laravel-newsletter": "^5.2",
 		"spatie/laravel-permission": "^6.9",
 		"spatie/laravel-sitemap": "^7.2",
