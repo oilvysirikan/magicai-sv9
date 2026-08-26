@@ -38,7 +38,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 RUN pecl install redis && docker-php-ext-enable redis
 
 # Install PHP Octane RoadRunner
-RUN curl -sSfL https://github.com/spiral/roadrunner/releases/download/v2.13.3/roadrunner-v2.13.3-linux-amd64.tar.gz | tar -xz -C /usr/local/bin/ \
+RUN curl -sSfL https://github.com/spiral/roadrunner/releases/download/v2024.1.2/roadrunner-2024.1.2-linux-amd64.tar.gz | tar -xz -C /usr/local/bin/ \
     && chmod +x /usr/local/bin/rr
 
 # Copy composer from composer stage
