@@ -9,12 +9,6 @@
 	"license": "MIT",
 	"repositories": [
 		{
-			"name": "yoomoney",
-			"type": "vcs",
-			"url": "https://github.com/yoomoney/yookassa-sdk-php.git",
-			"canonical": false
-		},
-		{
 			"type": "path",
 			"url": "./packages/magicai/magicai-updater",
 			"options": {
@@ -94,14 +88,14 @@
 		"laravel/tinker": "^2.8",
 		"league/flysystem-aws-s3-v3": "3.29.0",
 		"livewire/livewire": "^3.5",
-		"magicai/magicai-healthy": "@dev",
-		"magicai/magicai-updater": "@dev",
+		"magicai/magicai-healthy": "dev-main",
+		"magicai/magicai-updater": "dev-main",
 		"mcamara/laravel-localization": "^1.8",
 		"mews/purifier": "^3.4",
 		"nerdzlab/socialite-apple-sign-in": "^2.2",
 		"noweh/twitter-api-v2-php": "^3.4",
-		"openai-php/client": "@dev",
-		"openai-php/laravel": "@dev",
+		"openai-php/client": "dev-main",
+		"openai-php/laravel": "dev-main",
 		"orhanerday/open-ai": "^5.1",
 		"paddlehq/paddle-php-sdk": "^1.0",
 		"paquettg/php-html-parser": "^2.2",
@@ -113,7 +107,7 @@
 		"pragmarx/google2fa-laravel": "^2.2",
 		"protobuf-php/protobuf": "^0.1.3",
 		"pusher/pusher-php-server": "^7.2",
-		"rachidlaasri/laravel-installer": "@dev",
+		"rachidlaasri/laravel-installer": "dev-main",
 		"razorpay/razorpay": "^2.9",
 		"ryangjchandler/blade-tabler-icons": "^2.2",
 		"sentry/sentry-laravel": "^4.9",
@@ -208,6 +202,9 @@
 				"PKSA-4g5g-4rkv-myqs",
 				"PKSA-64jn-3d9t-gncx"
 			]
+		},
+		"platform": {
+			"php": "8.2"
 		}
 	},
 	"minimum-stability": "stable",
