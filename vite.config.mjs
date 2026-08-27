@@ -141,6 +141,13 @@ export default ( { mode } ) => {
 	return defineConfig( {
 		server: detectServerConfig( process.env.VITE_APP_DOMAIN || 'magicai.test' ),
 		plugins,
+		css: {
+			preprocessorOptions: {
+				scss: {
+					silenceDeprecations: ['import'],
+				},
+			},
+		},
 		build: {
 			rollupOptions: {
 				output: {
