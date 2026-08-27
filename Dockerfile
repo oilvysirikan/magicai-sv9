@@ -6,6 +6,7 @@ RUN pecl install swoole && docker-php-ext-enable swoole
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY composer.json composer.lock ./
+COPY packages ./packages
 RUN composer install --optimize-autoloader --no-scripts --no-interaction --ignore-platform-reqs
 
 FROM node:20-slim AS node_builder
