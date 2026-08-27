@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y \
     libonig-dev libxml2-dev \
     && docker-php-ext-install pdo_mysql mbstring zip bcmath gd pcntl opcache
 
+RUN pecl install swoole && docker-php-ext-enable swoole
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
