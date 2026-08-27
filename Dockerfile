@@ -2,7 +2,7 @@ FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libzip-dev libpng-dev libgd-dev \
-    libonig-dev libxml2-dev \
+    libonig-dev libxml2-dev libssl-dev \
     && docker-php-ext-install pdo_mysql mbstring zip bcmath gd pcntl opcache
 
 RUN pecl install swoole && docker-php-ext-enable swoole
