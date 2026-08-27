@@ -1,3 +1,10 @@
+FROM node:20-slim AS node_builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
 FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
@@ -12,6 +19,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 COPY . .
+COPY --from=node_builder /app/public/build ./public/build
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --optimize-autoloader --no-scripts --no-interaction --ignore-platform-reqs
