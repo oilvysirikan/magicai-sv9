@@ -30,3 +30,4 @@ coverage
 *.tar.gz
 .updater
 *.log.wrangler/
+public/vendor/
