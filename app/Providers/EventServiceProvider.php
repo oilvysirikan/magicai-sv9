@@ -19,6 +19,7 @@ use App\Listeners\BankTransferListener;
 use App\Listeners\FreePaymentListener;
 use App\Listeners\IyzicoLifetimeListener;
 use App\Listeners\IyzicoWebhookListener;
+use App\Listeners\LogAuthenticationActivity;
 use App\Listeners\PaypalLifetimeListener;
 use App\Listeners\PaypalWebhookListener;
 use App\Listeners\PaystackLifetimeListener;
@@ -28,6 +29,9 @@ use App\Listeners\StripeWebhookListener;
 use App\Listeners\TwoCheckoutWebhookListener;
 use App\Listeners\UsersActivityListener;
 use App\Listeners\YokassaWebhookListener;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -42,6 +46,16 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+            LogAuthenticationActivity::class,
+        ],
+        Login::class => [
+            LogAuthenticationActivity::class,
+        ],
+        Logout::class => [
+            LogAuthenticationActivity::class,
+        ],
+        Failed::class => [
+            LogAuthenticationActivity::class,
         ],
         PaypalWebhookEvent::class => [
             PaypalWebhookListener::class,

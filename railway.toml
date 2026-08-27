@@ -1,0 +1,17 @@
+# Railway deployment configuration for MagicAI (Laravel 10 + Octane/Swoole)
+# Docs: https://docs.railway.com/guides/dockerfile
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+# The container runs supervisord which starts Octane (web) + a queue worker.
+# Octane listens on $PORT; do not override the image CMD here.
+healthcheckPath = "/api/health"
+healthcheckTimeout = 100
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+# Non-destructive migrations run on every release. Destructive ops are NEVER
+# executed automatically — run those manually against a backup.
+releaseCommand = "php artisan migrate --force"
