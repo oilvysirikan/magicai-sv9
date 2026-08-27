@@ -1,8 +1,8 @@
-FROM php:8.4-fpm
+FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
     git curl zip unzip libzip-dev libpng-dev libgd-dev \
-    libonig-dev libxml2-dev redis-tools \
+    libonig-dev libxml2-dev \
     && docker-php-ext-install pdo_mysql mbstring zip bcmath gd pcntl opcache
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -10,9 +10,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY . .
 
-RUN composer install --optimize-autoloader --no-scripts --no-interaction
-
-RUN php artisan storage:link || true
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --optimize-autoloader --no-scripts --no-interaction --ignore-platform-reqs
 
 EXPOSE 8000
 CMD ["php", "artisan", "octane:start", "--server=swoole", "--host=0.0.0.0", "--port=8000"]
