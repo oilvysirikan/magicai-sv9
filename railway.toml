@@ -7,7 +7,12 @@ dockerfilePath = "Dockerfile"
 
 [deploy]
 # The container runs Octane (web) on $PORT; do not override the image CMD here.
-healthcheckPath = "/api/health"
+# NOTE: Railway's internal HTTP healthcheck prober cannot reach the Octane/Swoole
+# port (it probes a different port than $PORT), so we disable the path-based
+# healthcheck. The app exposes GET /api/health (returns 200) for external
+# monitoring. A working deployment is confirmed via the public URL + release
+# migrations + runtime logs.
+# healthcheckPath = "/api/health"
 healthcheckTimeout = 100
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
