@@ -34,4 +34,4 @@ COPY --from=node_builder /app/public/build ./public/build
 RUN mkdir -p storage/framework/cache/data     storage/framework/sessions     storage/framework/views     storage/logs     bootstrap/cache     && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8000
-CMD ["php", "artisan", "octane:start", "--server=swoole", "--host=0.0.0.0", "--port=8000"]
+CMD ["sh", "-c", "php artisan octane:start --server=swoole --host=0.0.0.0 --port=${PORT:-8000}"]

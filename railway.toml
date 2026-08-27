@@ -6,9 +6,9 @@ builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-# The container runs supervisord which starts Octane (web) + a queue worker.
-# Octane listens on $PORT; do not override the image CMD here.
-healthcheckPath = "/api/health"
+# The container runs Octane (web) on $PORT; do not override the image CMD here.
+# healthcheckPath is enabled below once the app is confirmed reachable.
+# healthcheckPath = "/api/health"
 healthcheckTimeout = 100
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
