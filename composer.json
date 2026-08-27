@@ -29,21 +29,23 @@
 				"symlink": false
 			}
 		},
-		{
-			"type": "path",
-			"url": "./packages/openai-php/laravel",
-			"options": {
-				"symlink": false
-			}
-		},
-		{
-			"type": "path",
-			"url": "./packages/openai-php/client",
-			"options": {
-				"symlink": false
-			}
-		}
-	],
+        {
+            "type": "path",
+            "url": "./packages/openai-php/laravel",
+            "options": {
+                "symlink": false
+            },
+            "canonical": false
+        },
+        {
+            "type": "path",
+            "url": "./packages/openai-php/client",
+            "options": {
+                "symlink": false
+            },
+            "canonical": false
+        }
+    ],
 	"require": {
 		"php": "^8.2",
 		"ext-curl": "*",
@@ -94,8 +96,8 @@
 		"mews/purifier": "^3.4",
 		"nerdzlab/socialite-apple-sign-in": "^2.2",
 		"noweh/twitter-api-v2-php": "^3.4",
-		"openai-php/client": "dev-main",
-		"openai-php/laravel": "dev-main",
+		"openai-php/client": "^0.10.0",
+		"openai-php/laravel": "^0.10.0",
 		"orhanerday/open-ai": "^5.1",
 		"paddlehq/paddle-php-sdk": "^1.0",
 		"paquettg/php-html-parser": "^2.2",
